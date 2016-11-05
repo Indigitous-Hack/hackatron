@@ -1,0 +1,6 @@
+[slackteam]
+username=foo
+password=slackteam.bar
+host=foo.irc.slack.com
+port=6697
+ssl=True

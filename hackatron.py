@@ -2,7 +2,7 @@ import logging
 import threading
 import configparser
 from Legobot.Lego import Lego
-from Local.Roll import Roll
+from legos.dice import Roll
 from Local.CourageWolf import Encourage
 
 from Legobot.Connectors.IRC import IRC

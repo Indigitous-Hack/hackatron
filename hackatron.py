@@ -1,11 +1,10 @@
 import logging
 import threading
 import configparser
+import os
 from Legobot.Lego import Lego
-from legos.dice import Roll
-from Local.CourageWolf import Encourage
 
-from Legobot.Connectors.IRC import IRC
+from Legobot.Connectors.Slack import Slack
 from Legobot.Legos.Help import Help
 
 config = configparser.ConfigParser()
@@ -27,14 +26,5 @@ baseplate = Lego.start(None, lock)
 baseplate_proxy = baseplate.proxy()
 
 # Add children
-baseplate_proxy.add_child(IRC,
-                          channels=['#social'],
-                          nickname=config['kbmm']['username'],
-                          server=config['kbmm']['host'],
-                          port=int(config['kbmm']['port']),
-                          use_ssl=config.getboolean('kbmm','ssl'),
-                          username=config['kbmm']['username'],
-                          password=config['kbmm']['password'])
+baseplate_proxy.add_child(Slack, os.environ['SLACK_TOKEN'])
 baseplate_proxy.add_child(Help)
-baseplate_proxy.add_child(Roll)
-baseplate_proxy.add_child(Encourage,encouragement='encouragement.txt')
